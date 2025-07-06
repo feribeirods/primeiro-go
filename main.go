@@ -5,25 +5,25 @@ import (
 )
 
 func buscaItem(itens map[string]string, item string) (string, error) {
-	
-	for itens, status := range itens {
-		if itens == item {
-			return status, nil
-		}
+
+	status, ok := itens[item]
+	if ok {
+		return status, nil
+	} else {
+		return "", fmt.Errorf("Item %s não encontrado", item)
 	}
 
-	return "", fmt.Errorf("Item %s não encontrado", item)
+	
 }
 
 func main() {
-	var itens map[string]string
-	itens = make(map[string]string)
+	itens := map[string]string {
+		"cadeira":   "Disponível",
+		"mesa": "Reservado",
+		"porta": "Disponível",
+	}
 
-	itens["mesa"] = "Disponível"
-	itens["cadeira"] = "Reservado"
-	itens["porta"] = "Disponível"
-
-	item, err := buscaItem(itens, "porta")
+	item, err := buscaItem(itens, "mesa")
 	if err != nil {
 		fmt.Println(err)
 	} else {
