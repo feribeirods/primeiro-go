@@ -5,22 +5,17 @@ import (
 )
 
 func buscaItem(itens map[string]string, item string) (string, error) {
-
-	status, ok := itens[item]
-	if ok {
+	if status, ok := itens[item]; ok {
 		return status, nil
-	} else {
-		return "", fmt.Errorf("Item %s não encontrado", item)
 	}
-
-	
+	return "", fmt.Errorf("Item %s não encontrado", item)
 }
 
 func main() {
-	itens := map[string]string {
-		"cadeira":   "Disponível",
-		"mesa": "Reservado",
-		"porta": "Disponível",
+	itens := map[string]string{
+		"cadeira": "Disponível",
+		"mesa":    "Reservado",
+		"porta":   "Disponível",
 	}
 
 	item, err := buscaItem(itens, "mesa")
@@ -29,5 +24,4 @@ func main() {
 	} else {
 		fmt.Printf("O status do item é: %s\n", item)
 	}
-		
 }
